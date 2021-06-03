@@ -32,7 +32,7 @@ function Post() {
 
               <Card.Footer>
                 <div className="text-center">
-                  <Button className="btn btn-warning">Discover More</Button>
+                  <Button className="btn btn-primary">View Profile</Button>
                 </div>
               </Card.Footer>
             </Card>

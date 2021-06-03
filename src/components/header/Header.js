@@ -36,8 +36,8 @@ function Header() {
                 Chocolate
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/products/more">
-                More
+              <NavDropdown.Item as={Link} to="/post">
+                My Feed
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/blog">
