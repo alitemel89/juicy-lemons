@@ -1,0 +1,69 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import logo from "../../images/lemon.svg";
+
+function Header() {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <>
+      <Navbar
+        bg="primary"
+        variant="dark"
+        sticky="top"
+        expand="md"
+        collapseOnSelect
+        expanded={expanded}
+      >
+        <Navbar.Brand className="px-2 mx-2" as={Link} to="/">
+          <img src={logo} width="35" height="35" alt="company-logo" />
+          &nbsp; Juicy Lemons
+        </Navbar.Brand>
+        <Navbar.Toggle
+          className="mx-3"
+          onClick={() => setExpanded(expanded ? false : "expanded")}
+        />
+        <Navbar.Collapse className="px-2">
+          <Nav className="mr-auto">
+            <NavDropdown title="Products">
+              <NavDropdown.Item as={Link} to="/products/tea">
+                Tea
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/products/coffee">
+                Coffee
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/products/chocolate">
+                Chocolate
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/products/more">
+                More
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link as={Link} to="/blog">
+              Blog
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about">
+              About us
+            </Nav.Link>
+          </Nav>
+
+          <Nav className="align-items-md-center">
+            <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)}>
+              Login
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to="/register"
+              onClick={() => setExpanded(false)}
+            >
+              <Button variant="btn btn-secondary">Register</Button>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
+  );
+}
+
+export default Header;
