@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button, Row, Container, Col } from "react-bootstrap";
 import { FcGoogle } from "@react-icons/all-files/fc/FcGoogle";
+import { signInWithGoogle } from "../../utils/FirebaseUtils";
 
 function Register() {
   return (
@@ -36,6 +37,7 @@ function Register() {
                 <Button
                   className="btn btn-dark border-primary ml-1"
                   type="submit"
+                  onClick={() => signInWithGoogle()}
                 >
                   Sign up with Google <FcGoogle className="mb-1" />
                 </Button>
