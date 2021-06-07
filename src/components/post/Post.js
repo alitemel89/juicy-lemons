@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Form, Button, Container, Col, Row } from "react-bootstrap";
 import firstSlide from "../../images/firstslide.jpg";
 import secondSlide from "../../images/secondslide.jpg";
 import thirdSlide from "../../images/thirdslide.jpg";
+import { BsHeart } from "react-icons/bs";
+import { BsChat } from "react-icons/bs";
+import { BsHeartFill } from "react-icons/bs";
 
 function Post() {
+  const [click, setClick] = useState(false);
+
   return (
     <>
       <Container>
         <Row>
           <Col sm={4}>
-            <Card className="shadow m-2">
+            <Card className="shadow m-3">
               <Card.Img
                 variant="top"
                 src={thirdSlide}
@@ -38,7 +43,7 @@ function Post() {
             </Card>
           </Col>
           <Col sm={8}>
-            <Card className="shadow m-2">
+            <Card className="shadow m-3">
               <Form className="p-4">
                 <Form.Group
                   className="mb-3"
@@ -52,7 +57,7 @@ function Post() {
               </Form>
             </Card>
 
-            <Card className="shadow m-2">
+            <Card className="shadow m-3">
               <Card.Img variant="top" src={firstSlide} />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
@@ -63,21 +68,68 @@ function Post() {
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
-                <Button className="btn btn-secondary">Go to website</Button>
+                {click ? (
+                  <BsHeartFill
+                    size={29}
+                    color="#C60F7B"
+                    className="mr-2"
+                    role="button"
+                    onClick={() => setClick(!click)}
+                  />
+                ) : (
+                  <BsHeart
+                    size={29}
+                    color="#15195f"
+                    className="mr-2"
+                    role="button"
+                    onClick={() => setClick(!click)}
+                  />
+                )}
+
+                <BsChat
+                  size={30}
+                  color="#15195f"
+                  className="mb-1"
+                  role="button"
+                />
               </Card.Footer>
             </Card>
 
-            <Card className="shadow m-2 mb-4">
+            <Card className="shadow m-3">
               <Card.Img variant="top" src={secondSlide} />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>
-                  This card has supporting text below as a natural lead-in to
-                  additional content.{" "}
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
                 </Card.Text>
               </Card.Body>
               <Card.Footer>
-                <Button className="btn btn-secondary">Go to website</Button>
+                {click ? (
+                  <BsHeartFill
+                    size={29}
+                    color="#C60F7B"
+                    className="mr-2"
+                    role="button"
+                    onClick={() => setClick(!click)}
+                  />
+                ) : (
+                  <BsHeart
+                    size={29}
+                    color="#15195f"
+                    className="mr-2"
+                    role="button"
+                    onClick={() => setClick(!click)}
+                  />
+                )}
+
+                <BsChat
+                  size={30}
+                  color="#15195f"
+                  className="mb-1"
+                  role="button"
+                />
               </Card.Footer>
             </Card>
           </Col>
