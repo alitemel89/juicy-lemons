@@ -4,6 +4,7 @@ import { FcGoogle } from "@react-icons/all-files/fc/FcGoogle";
 import { signInWithGoogle } from "../../utils/FirebaseUtils";
 
 function Register() {
+
   return (
     <>
       <Container>
@@ -36,7 +37,6 @@ function Register() {
                 </Button>
                 <Button
                   className="btn btn-dark border-primary ml-1"
-                  type="submit"
                   onClick={() => signInWithGoogle()}
                 >
                   Sign up with Google <FcGoogle className="mb-1" />
