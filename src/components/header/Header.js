@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import logo from "../../images/lemon.svg";
 
+
+import { useAuth } from "../../contexts/AuthContext";
+import { auth } from "../../utils/FirebaseUtils";
+
 function Header() {
   const [expanded, setExpanded] = useState(false);
+  const { currentUser } = useAuth();
+  console.log(currentUser);
   return (
     <>
       <Navbar
@@ -48,18 +54,35 @@ function Header() {
             </Nav.Link>
           </Nav>
 
-          <Nav className="align-items-md-center">
-            <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)}>
-              Login
+          {currentUser ? (
+            <Nav.Link as={Link} onClick={() => setExpanded(false)}>
+              <Redirect to="/"></Redirect>
+              <Button
+                variant="btn btn-secondary"
+                onClick={() => auth.signOut()}
+              >
+                Sign out
+              </Button>
             </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to="/register"
-              onClick={() => setExpanded(false)}
-            >
-              <Button variant="btn btn-secondary">Register</Button>
-            </Nav.Link>
-          </Nav>
+          ) : (
+            <Nav className="align-items-md-center">
+              <Nav.Link
+                as={Link}
+                to="/login"
+                onClick={() => setExpanded(false)}
+              >
+                <Redirect to="/login"></Redirect>
+                Login
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/register"
+                onClick={() => setExpanded(false)}
+              >
+                <Button variant="btn btn-secondary">Register</Button>
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </>

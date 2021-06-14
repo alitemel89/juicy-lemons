@@ -13,8 +13,7 @@ function About() {
               meggings literally live-edge typewriter schlitz artisan. Twee
               shabby chic banh mi blog ugh air plant echo park fanny pack
               bushwick coloring book. Deep v af offal, cornhole normcore ramps
-              tousled prism street art beard hexagon distillery salvia polaroid.
-              Occupy subway tile tattooed etsy truffaut meditation vegan.
+
             </p>
             <hr />
             <p>
@@ -22,9 +21,7 @@ function About() {
               Offal narwhal YOLO taxidermy, tousled gastropub woke ennui banjo
               whatever church-key master cleanse listicle squid. Gochujang
               humblebrag street art affogato. Drinking vinegar polaroid
-              live-edge kogi asymmetrical austin lomo. Keffiyeh coloring book
-              brunch, tousled celiac gochujang vegan tbh street art cloud bread.
-              Glossier raclette blog chillwave iPhone aesthetic.
+              live-edge kogi asymmetrical austin lomo. 
             </p>
 
             <p>
@@ -33,10 +30,7 @@ function About() {
               small batch fashion axe food truck lumbersexual, coloring book
               disrupt try-hard meditation woke irony. Waistcoat letterpress
               migas master cleanse aesthetic hella banjo dreamcatcher photo
-              booth. Kitsch VHS pour-over selfies bitters, meggings yuccie
-              pop-up austin. Pinterest schlitz portland sustainable actually
-              synth typewriter knausgaard, kogi keffiyeh. Offal shoreditch
-              scenester occupy, cliche ramps edison bulb.
+              booth. Kitsch VHS pour-over selfies bitters.
             </p>
           </div>
         </div>
