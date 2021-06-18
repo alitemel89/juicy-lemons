@@ -94,12 +94,15 @@ function Post() {
                 </Form.Group>
                 <Form.File
                   id="custom-file-translate-scss"
-                  label={image.name}
+                  label={image ? <Form.Label>{image.name}</Form.Label> : "upload an image"}
                   lang="en"
                   custom
                   onChange={handleChange}
                 />
-                <Button className="btn btn-primary mt-3" onClick={handleUpload} >Share</Button>
+                
+                <Button className="btn btn-primary mt-3" onClick={handleUpload}>
+                  Share
+                </Button>
               </Form>
             </Card>
 
@@ -181,8 +184,6 @@ function Post() {
           </Col>
         </Row>
       </Container>
-
-     
     </>
   );
 }
