@@ -10,7 +10,7 @@ import { auth } from "../../utils/FirebaseUtils";
 function Header() {
   const [expanded, setExpanded] = useState(false);
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  
   return (
     <>
       <Navbar
