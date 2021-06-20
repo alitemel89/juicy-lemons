@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, Form, Button, Container, Col, Row } from "react-bootstrap";
 import firstSlide from "../../images/firstslide.jpg";
 import secondSlide from "../../images/secondslide.jpg";
@@ -7,6 +7,7 @@ import { BsHeart } from "react-icons/bs";
 import { BsChat } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 import { storage } from "../../utils/FirebaseUtils";
+import PostCard from "../PostCard/PostCard";
 
 
 function Post() {
@@ -14,13 +15,30 @@ function Post() {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
-  const handleChange = e => {
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleImageChange = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
   };
+
   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpload();
+  }
+
 
   const handleUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -50,8 +68,6 @@ function Post() {
 
   return (
     <>
-      <img src={url || "http://via.placeholder.com/300"} alt="firebase-image" />
-      <progress value={progress} max="100" />
       <Container>
         <Row>
           <Col sm={4}>
@@ -64,7 +80,7 @@ function Post() {
               />
 
               <Card.Body>
-                <Card.Title className="text-center">Ali Temel</Card.Title>
+                <Card.Title className="text-center">Juicy Lemon</Card.Title>
                 <Card.Text>
                   This card has supporting text below as a natural lead-in to
                   additional content.{" "}
@@ -84,27 +100,56 @@ function Post() {
           </Col>
           <Col sm={8}>
             <Card className="shadow m-3">
-              <Form className="p-4">
+              <Form className="p-4" onSubmit={handleSubmit}>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Hi Ali! What is in your mind?</Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    as="textarea"
+                    rows={1}
+                    className="mb-2"
+                    value={title}
+                    onChange={handleTitleChange}
+                  />
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={description}
+                    onChange={handleDescriptionChange}
+                  />
                 </Form.Group>
+                <progress
+                  value={progress}
+                  max="100"
+                  style={{ width: "100%" }}
+                />
                 <Form.File
                   id="custom-file-translate-scss"
-                  label={image ? <Form.Label>{image.name}</Form.Label> : "upload an image"}
+                  label={
+                    image ? (
+                      <Form.Label>{image.name}</Form.Label>
+                    ) : (
+                      "Upload an image..."
+                    )
+                  }
                   lang="en"
                   custom
-                  onChange={handleChange}
+                  onChange={handleImageChange}
                 />
-                
-                <Button className="btn btn-primary mt-3" onClick={handleUpload}>
+
+                <Button className="btn btn-primary mt-3" onClick={handleSubmit}>
                   Share
                 </Button>
               </Form>
             </Card>
+
+            <PostCard
+              imageUrl={url}
+              title={title}
+              description={description}
+            />
 
             <Card className="shadow m-3">
               <Card.Img variant="top" src={firstSlide} />
