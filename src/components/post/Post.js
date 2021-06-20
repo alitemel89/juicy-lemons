@@ -65,7 +65,6 @@ function Post() {
     );
   };
 
-
   return (
     <>
       <Container>
