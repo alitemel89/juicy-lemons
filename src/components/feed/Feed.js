@@ -14,6 +14,9 @@ function Feed() {
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState("");
+  const [userPhotoUrl, setUserPhotoUrl] = useState(
+    "https://secure.gravatar.com/avatar/d6fd6bff19d7f0ad4024f3811474fe92?s=180&d=mm&r=g"
+  );
 
   const { currentUser } = useAuth();
 
@@ -21,9 +24,15 @@ function Feed() {
     if (currentUser !== null) {
       currentUser.providerData.forEach((profile) => {
         setUserName(profile.displayName);
+        setUserPhotoUrl(profile.photoURL);
       });
     }
   }, [currentUser]);
+
+  if (userName === null) {
+    setUserName("");
+    setUserPhotoUrl("https://secure.gravatar.com/avatar/d6fd6bff19d7f0ad4024f3811474fe92?s=180&d=mm&r=g")
+  }
 
   useEffect(() => {
     firestore.collection("posts").onSnapshot((snapshot) => {
@@ -104,14 +113,14 @@ function Feed() {
             <Card className="shadow m-3">
               <Card.Img
                 variant="top"
-                src={thirdSlide}
+                src={userPhotoUrl}
                 className="rounded-circle"
                 style={imageStyles}
               />
 
               <Card.Body>
                 {currentUser ? (
-                  <Card.Title className="text-center">{`Hello ${userName}`}</Card.Title>
+                  <Card.Title className="text-center">{`Hello ${userName} 👋`}</Card.Title>
                 ) : (
                   <Card.Title className="text-center">Juicy Lemon</Card.Title>
                 )}
