@@ -7,8 +7,8 @@ import Blog from "./pages/blog/Blog";
 import Hero from "./components/hero/Hero";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import Post from "./components/post/Post";
 import { AuthProvider } from "./contexts/AuthContext";
+import Feed from "./components/feed/Feed";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/blog" component={Blog} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/post" component={Post} />
+          <Route exact path="/feed" component={Feed} />
         </Switch>
       </Router>
     </AuthProvider>

@@ -42,7 +42,7 @@ function Header() {
                 Chocolate
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/post">
+              <NavDropdown.Item as={Link} to="/feed">
                 My Feed
               </NavDropdown.Item>
             </NavDropdown>
@@ -71,7 +71,7 @@ function Header() {
                 to="/login"
                 onClick={() => setExpanded(false)}
               >
-                <Redirect to="/login"></Redirect>
+                <Redirect to="/feed"></Redirect>
                 Login
               </Nav.Link>
               <Nav.Link
