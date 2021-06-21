@@ -4,6 +4,7 @@ import thirdSlide from "../../images/thirdslide.jpg";
 import { firestore, storage } from "../../utils/FirebaseUtils";
 import Post from "../post/Post";
 import firebase from "firebase";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Feed() {
   const [image, setImage] = useState(null);
@@ -12,6 +13,17 @@ function Feed() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [posts, setPosts] = useState([]);
+  const [userName, setUserName] = useState("");
+
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      currentUser.providerData.forEach((profile) => {
+        setUserName(profile.displayName);
+      });
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     firestore.collection("posts").onSnapshot((snapshot) => {
@@ -26,17 +38,29 @@ function Feed() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleUpload();
+    await handleUpload();
+
+    const urlFromStore = await storage
+      .ref("images")
+      .child(image.name)
+      .getDownloadURL();
+
+    await setUrl(urlFromStore);
+
+    // console.log("Inside of handle submit");
+    // console.log(url);
+    // console.log(urlFromStore);
+
     await firestore.collection("posts").add({
       title: title,
       description: description,
-      imageUrl: url,
+      imageUrl: urlFromStore,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
-    setDescription('');
-    setTitle('')
-    setImage('')
+    setDescription("");
+    setTitle("");
+    setImage("");
   };
 
   const handleTitleChange = (e) => {
@@ -53,12 +77,12 @@ function Feed() {
     }
   };
 
-  const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image)
-    uploadTask.on(
+  const handleUpload = async () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    await uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =  Math.round(
+        const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setProgress(progress);
@@ -67,16 +91,9 @@ function Feed() {
         console.log(error);
       },
       () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
-          });
+        storage.ref("images").child(image.name).getDownloadURL();
       }
     );
-
   };
 
   return (
@@ -93,7 +110,12 @@ function Feed() {
               />
 
               <Card.Body>
-                <Card.Title className="text-center">Juicy Lemon</Card.Title>
+                {currentUser ? (
+                  <Card.Title className="text-center">{`Hello ${userName}`}</Card.Title>
+                ) : (
+                  <Card.Title className="text-center">Juicy Lemon</Card.Title>
+                )}
+
                 <Card.Text>
                   This card has supporting text below as a natural lead-in to
                   additional content.{" "}
@@ -106,7 +128,7 @@ function Feed() {
 
               <Card.Footer>
                 <div className="text-center">
-                  <Button className="btn btn-primary">View Profile</Button>
+                  <Button className="btn btn-primary">Follow</Button>
                 </div>
               </Card.Footer>
             </Card>

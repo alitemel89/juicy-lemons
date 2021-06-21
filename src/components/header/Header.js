@@ -56,7 +56,7 @@ function Header() {
 
           {currentUser ? (
             <Nav.Link as={Link} onClick={() => setExpanded(false)}>
-              <Redirect to="/"></Redirect>
+              <Redirect to="/feed"></Redirect>
               <Button
                 variant="btn btn-secondary"
                 onClick={() => auth.signOut()}
