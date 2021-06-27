@@ -106,7 +106,13 @@ function Feed() {
     );
   };
 
+  const sortedPosts = posts
+    .sort((a, b) => {
+      return new Date(a.data.createdAt.seconds) - new Date(b.data.createdAt.seconds)
+    })
+    .reverse();
 
+  console.log(sortedPosts);
   return (
     <>
       <Container>
@@ -192,16 +198,21 @@ function Feed() {
             </Card>
 
             {/* Posts */}
-            {posts.map(
+            {sortedPosts.map(
               ({ id, data: { title, description, imageUrl, createdAt } }) => (
                 <Post
                   key={id}
                   title={title}
                   description={description}
                   imageUrl={imageUrl}
-                  createdAt={moment(new Date(
-                    createdAt.seconds * 1000
-                  ).toLocaleString(), "MM/DD/YYYY h:mm:ss a").fromNow()}
+                  createdAt={
+                    createdAt.seconds !== null
+                      ? moment(
+                          new Date(createdAt.seconds * 1000).toLocaleString(),
+                          "MM/DD/YYYY h:mm:ss a"
+                        ).fromNow()
+                      : "a few minutes ago"
+                  }
                 />
               )
             )}
