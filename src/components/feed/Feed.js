@@ -5,6 +5,7 @@ import { firestore, storage } from "../../utils/FirebaseUtils";
 import Post from "../post/Post";
 import firebase from "firebase";
 import { useAuth } from "../../contexts/AuthContext";
+import moment from 'moment';
 
 function Feed() {
   const [image, setImage] = useState(null);
@@ -64,7 +65,7 @@ function Feed() {
       title: title,
       description: description,
       imageUrl: urlFromStore,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     setDescription("");
@@ -104,6 +105,7 @@ function Feed() {
       }
     );
   };
+
 
   return (
     <>
@@ -149,7 +151,7 @@ function Feed() {
                   className="mb-3"
                   controlId="exampleForm.ControlTextarea1"
                 >
-                  <Form.Label>Hi Ali! What is in your mind?</Form.Label>
+                  <Form.Label>Hi! What is in your mind?</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={1}
@@ -190,14 +192,19 @@ function Feed() {
             </Card>
 
             {/* Posts */}
-            {posts.map(({ id, data: { title, description, imageUrl } }) => (
-              <Post
-                key={id}
-                title={title}
-                description={description}
-                imageUrl={imageUrl}
-              />
-            ))}
+            {posts.map(
+              ({ id, data: { title, description, imageUrl, createdAt } }) => (
+                <Post
+                  key={id}
+                  title={title}
+                  description={description}
+                  imageUrl={imageUrl}
+                  createdAt={moment(new Date(
+                    createdAt.seconds * 1000
+                  ).toLocaleString(), "MM/DD/YYYY h:mm:ss a").fromNow()}
+                />
+              )
+            )}
           </Col>
         </Row>
       </Container>

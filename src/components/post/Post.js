@@ -4,7 +4,7 @@ import { BsHeart } from "react-icons/bs";
 import { BsChat } from "react-icons/bs";
 import { BsHeartFill } from "react-icons/bs";
 
-function Post({ title, imageUrl, description }) {
+function Post({ title, imageUrl, description, createdAt }) {
   const [click, setClick] = useState(false);
   return (
     <>
@@ -35,6 +35,7 @@ function Post({ title, imageUrl, description }) {
 
           <BsChat size={30} color="#15195f" className="mb-1" role="button" />
         </Card.Footer>
+        <Card.Footer>{createdAt}</Card.Footer>
       </Card>
     </>
   );
