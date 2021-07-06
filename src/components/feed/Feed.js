@@ -208,7 +208,7 @@ function Feed() {
                   createdAt={
                     createdAt.seconds !== null
                       ? moment(
-                          new Date(createdAt.seconds * 1000).toLocaleString(),
+                          new Date(createdAt.seconds * 1000).toLocaleString('en-US'),
                           "MM/DD/YYYY h:mm:ss a"
                         ).fromNow()
                       : "a few minutes ago"

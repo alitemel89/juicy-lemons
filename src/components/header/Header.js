@@ -71,7 +71,6 @@ function Header() {
                 to="/login"
                 onClick={() => setExpanded(false)}
               >
-                <Redirect to="/feed"></Redirect>
                 Login
               </Nav.Link>
               <Nav.Link
